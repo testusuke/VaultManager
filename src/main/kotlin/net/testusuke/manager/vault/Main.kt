@@ -25,18 +25,18 @@ class Main: JavaPlugin() {
 
         if (command.name == "bal") {
             if (args.isEmpty()) { //  残高確認
-                val money = vaultManager.getEconomy()?.getBalance(sender)
+                val money = vaultManager.economy?.getBalance(sender)
                 sender.sendMessage("${ChatColor.GREEN}あなたの残高: $money")
                 return true
             }
 
             when (args[0]) {
                 "get" -> {  //  お金をもらう
-                    vaultManager.getEconomy()?.depositPlayer(sender, 100.toDouble())
+                    vaultManager.economy?.depositPlayer(sender, 100.toDouble())
                     sender.sendMessage("${ChatColor.YELLOW}100＄をゲットした！")
                 }
                 "remove" -> {   //  お金を引き出す
-                    vaultManager.getEconomy()?.withdrawPlayer(sender, 100.toDouble())
+                    vaultManager.economy?.withdrawPlayer(sender, 100.toDouble())
                     sender.sendMessage("${ChatColor.YELLOW}100＄をゲットした！")
                 }
             }

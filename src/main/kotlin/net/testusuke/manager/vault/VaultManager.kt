@@ -1,7 +1,6 @@
 package net.testusuke.manager.vault
 
 import net.milkbowl.vault.economy.Economy
-import org.bukkit.plugin.RegisteredServiceProvider
 import org.bukkit.plugin.java.JavaPlugin
 
 /**
@@ -10,21 +9,22 @@ import org.bukkit.plugin.java.JavaPlugin
  * VaultManagerのインスタンス作成時にJavaPluginを渡してください。
  *
  * 残高確認
- * vaultManager.getEconomy()?.getBalance(player)
+ * vaultManager.economy?.getBalance(player)
  * 引き出し
- * vaultManager.getEconomy()?.withdrawPlayer(player,double)
+ * vaultManager.economy?.withdrawPlayer(player,double)
  * 入金
- * vaultManager.getEconomy()?.depositPlayer(player,double)
+ * vaultManager.economy?.depositPlayer(player,double)
  *
  */
-class VaultManager(plugin: JavaPlugin) {
-    private var plugin: JavaPlugin = plugin
-    private var mode: Boolean = true
+class VaultManager(private var plugin: JavaPlugin) {
+    var enableEconomy = true
+        private set
 
-    private var economy: Economy? = null
+    var economy: Economy? = null
+        private set
 
     init {
-        mode = if (setupEconomy()) {
+        enableEconomy = if (setupEconomy()) {
             plugin.logger.info("setup Vault")
             true
         } else {
@@ -37,18 +37,12 @@ class VaultManager(plugin: JavaPlugin) {
             plugin.logger.info("Vault is not installed")
             return false
         }
-        val rsp: RegisteredServiceProvider<Economy>? =
-            plugin.server.servicesManager.getRegistration(Economy::class.java)
+        val rsp = plugin.server.servicesManager.getRegistration(Economy::class.java)
         if (rsp == null) {
             plugin.logger.info("Can not use Vault service")
             return false
         }
         economy = rsp.provider
-        return economy != null
+        return true
     }
-
-    fun getEconomy(): Economy? {
-        return economy
-    }
-
 }

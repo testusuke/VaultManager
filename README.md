@@ -44,9 +44,9 @@ Maven(pom.xml)
 ```  
 ## Vaultを使用してみる。  
 残高確認  
-vaultManager.getEconomy()?.getBalance(player)  
+vaultManager.economy?.getBalance(player)  
 引き出し  
-vaultManager.getEconomy()?.withdrawPlayer(player,double)  
+vaultManager.economy?.withdrawPlayer(player,double)  
 入金  
-vaultManager.getEconomy()?.depositPlayer(player,double)  
+vaultManager.economy?.depositPlayer(player,double)  
 
