@@ -49,7 +49,4 @@ vaultManager.getEconomy()?.getBalance(player)
 vaultManager.getEconomy()?.withdrawPlayer(player,double)  
 入金  
 vaultManager.getEconomy()?.depositPlayer(player,double)  
-## ライセンス
-ライセンスはGPL-3.0が適応されます
-著作者の記述は消さないでください。
-VaultManagerの@author
+
