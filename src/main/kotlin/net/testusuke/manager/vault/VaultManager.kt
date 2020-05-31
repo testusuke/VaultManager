@@ -1,53 +1,46 @@
 package net.testusuke.manager.vault
 
 import net.milkbowl.vault.economy.Economy
-import org.bukkit.plugin.RegisteredServiceProvider
-import org.bukkit.plugin.java.JavaPlugin
+import net.testusuke.manager.vault.Main.Companion.plugin
 
 /**
  * @author testusuke
- * Vault連携のためのクラスです。
- * VaultManagerのインスタンス作成時にJavaPluginを渡してください。
+ * Vault連携のためのオブジェクト
  *
  * 残高確認
- * vaultManager.getEconomy()?.getBalance(player)
+ * VaultManager.economy?.getBalance(player)
  * 引き出し
- * vaultManager.getEconomy()?.withdrawPlayer(player,double)
+ * VaultManager.economy?.withdrawPlayer(player,double)
  * 入金
- * vaultManager.getEconomy()?.depositPlayer(player,double)
+ * VaultManager.economy?.depositPlayer(player,double)
  *
  */
-class VaultManager(plugin: JavaPlugin) {
-    private var plugin:JavaPlugin = plugin
-    private var mode:Boolean = true
+object VaultManager {
+    var enableEconomy = true
+        private set
 
-    private var economy:Economy? = null
+    var economy: Economy? = null
+        private set
 
-    init {
-        mode = if(setupEconomy()){
-            plugin.logger.info("setup Vault")
-            true
-        }else{
-            false
-        }
+    fun setup() {
+        enableEconomy = setupEconomy()
+        if (enableEconomy) plugin.logger.info("Enable Vault")
     }
 
-    private fun setupEconomy():Boolean{
-        if(plugin.server.pluginManager.getPlugin("Vault") == null){
+    private inline val enableVault
+        get() = plugin.server.pluginManager.isPluginEnabled("Vault")
+
+    private fun setupEconomy(): Boolean {
+        if (!enableVault) {
             plugin.logger.info("Vault is not installed")
             return false
         }
-        val rsp:RegisteredServiceProvider<Economy>? = plugin.server.servicesManager.getRegistration(Economy::class.java)
-        if(rsp == null){
+        val rsp = plugin.server.servicesManager.getRegistration(Economy::class.java)
+        if (rsp == null) {
             plugin.logger.info("Can not use Vault service")
             return false
         }
         economy = rsp.provider
-        return economy != null
+        return true
     }
-
-    fun getEconomy(): Economy? {
-        return economy
-    }
-
 }

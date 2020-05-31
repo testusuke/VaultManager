@@ -2,7 +2,7 @@
   
 ## Vaultの依存関係へ追加
 Gradle(build.gradle)  
-```$xslt
+```groovy
 repositories {
     maven {
         url = uri("https://jitpack.io")
@@ -14,7 +14,7 @@ dependencies {
 }
 ```  
 Maven(pom.xml)  
-```$xslt
+```xml
 <repositories>
 	<repository>
 		<id>jitpack.io</id>
@@ -31,22 +31,17 @@ Maven(pom.xml)
 </dependencies>
 ```  
   
-## メインクラスでVaultManagerを定義してインスタンスを作成  
-```$xslt
-    companion object{
-        //  vaultManager
-        lateinit var vaultManager:VaultManager
-    }
-    override fun onEnable() {
-        //  VaultManager
-        vaultManager = VaultManager(this)
-    }
-```  
 ## Vaultを使用してみる。  
-残高確認  
-vaultManager.getEconomy()?.getBalance(player)  
-引き出し  
-vaultManager.getEconomy()?.withdrawPlayer(player,double)  
-入金  
-vaultManager.getEconomy()?.depositPlayer(player,double)  
+- 残高確認
+```kotlin
+VaultManager.economy?.getBalance(Player)
+```
+- 引き出し
+```kotlin
+VaultManager.economy?.withdrawPlayer(Player, Double)
+```
+- 入金
+```kotlin
+VaultManager.economy?.depositPlayer(Player, Double)
+```
 

@@ -36,6 +36,11 @@ bukkit {
     main = "$group.vault.Main"
     author = "testusuke"
     apiVersion = "1.15"
+    commands {
+        register("bal") {
+            description = "経済を使ったコマンドの簡単な例です"
+        }
+    }
 }
 
 val jar by tasks.getting(Jar::class) {
