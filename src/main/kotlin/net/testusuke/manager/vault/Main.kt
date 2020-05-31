@@ -14,8 +14,6 @@ class Main: JavaPlugin() {
         //  VaultManager setup
         VaultManager.setup()
 
-        getCommand("bal")?.run {
-            setExecutor(BalanceExampleCommand)
-        }
+        getCommand("bal")?.setExecutor(BalanceExampleCommand)
     }
 }
