@@ -1,29 +1,28 @@
 package net.testusuke.manager.vault
 
 import net.milkbowl.vault.economy.Economy
-import org.bukkit.plugin.java.JavaPlugin
+import net.testusuke.manager.vault.Main.Companion.plugin
 
 /**
  * @author testusuke
- * Vault連携のためのクラスです。
- * VaultManagerのインスタンス作成時にJavaPluginを渡してください。
+ * Vault連携のためのオブジェクト
  *
  * 残高確認
- * vaultManager.economy?.getBalance(player)
+ * VaultManager.economy?.getBalance(player)
  * 引き出し
- * vaultManager.economy?.withdrawPlayer(player,double)
+ * VaultManager.economy?.withdrawPlayer(player,double)
  * 入金
- * vaultManager.economy?.depositPlayer(player,double)
+ * VaultManager.economy?.depositPlayer(player,double)
  *
  */
-class VaultManager(private var plugin: JavaPlugin) {
+object VaultManager {
     var enableEconomy = true
         private set
 
     var economy: Economy? = null
         private set
 
-    init {
+    fun setup() {
         enableEconomy = if (setupEconomy()) {
             plugin.logger.info("setup Vault")
             true

@@ -5,15 +5,14 @@ import org.bukkit.plugin.java.JavaPlugin
 class Main: JavaPlugin() {
 
     companion object {
-        //  vaultManager
-        lateinit var vaultManager: VaultManager
+        internal lateinit var plugin: JavaPlugin
     }
 
     override fun onEnable() {
-        logger.info("load class")
+        plugin = this
 
-        //  VaultManager
-        vaultManager = VaultManager(this)
+        //  VaultManager setup
+        VaultManager.setup()
 
         getCommand("bal")?.run {
             setExecutor(BalanceExampleCommand)

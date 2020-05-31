@@ -31,28 +31,17 @@ Maven(pom.xml)
 </dependencies>
 ```  
   
-## メインクラスでVaultManagerを定義してインスタンスを作成  
-```kotlin
-    companion object{
-        //  vaultManager
-        lateinit var vaultManager: VaultManager
-    }
-    override fun onEnable() {
-        //  VaultManager
-        vaultManager = VaultManager(this)
-    }
-```  
 ## Vaultを使用してみる。  
 - 残高確認
 ```kotlin
-vaultManager.economy?.getBalance(Player)
+VaultManager.economy?.getBalance(Player)
 ```
 - 引き出し
 ```kotlin
-vaultManager.economy?.withdrawPlayer(Player, Double)
+VaultManager.economy?.withdrawPlayer(Player, Double)
 ```
 - 入金
 ```kotlin
-vaultManager.economy?.depositPlayer(Player, Double)
+VaultManager.economy?.depositPlayer(Player, Double)
 ```
 
