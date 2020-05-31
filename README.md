@@ -42,7 +42,7 @@ Maven(pom.xml)
         vaultManager = VaultManager(this)
     }
 ```  
-## Vaultを使用しみる。  
+## Vaultを使用してみる。  
 残高確認  
 vaultManager.getEconomy()?.getBalance(player)  
 引き出し  
