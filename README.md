@@ -1,6 +1,6 @@
-#VaultManager
+# VaultManager
   
-##Vaultの依存関係へ追加
+## Vaultの依存関係へ追加
 Gradle(build.gradle)  
 ```$xslt
 repositories {
@@ -31,7 +31,7 @@ Maven(pom.xml)
 </dependencies>
 ```  
   
-##メインクラスでVaultManagerを定義してインスタンスを作成  
+## メインクラスでVaultManagerを定義してインスタンスを作成  
 ```$xslt
     companion object{
         //  vaultManager
@@ -42,7 +42,7 @@ Maven(pom.xml)
         vaultManager = VaultManager(this)
     }
 ```  
-##Vaultを使用しみる。  
+## Vaultを使用しみる。  
 残高確認  
 vaultManager.getEconomy()?.getBalance(player)  
 引き出し  
