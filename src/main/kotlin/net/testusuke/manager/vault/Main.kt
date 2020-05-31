@@ -8,11 +8,10 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class Main: JavaPlugin() {
 
-    companion object{
+    companion object {
         //  vaultManager
-        lateinit var vaultManager:VaultManager
+        lateinit var vaultManager: VaultManager
     }
-
 
     override fun onEnable() {
         logger.info("load class")
@@ -22,22 +21,22 @@ class Main: JavaPlugin() {
     }
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if(sender !is Player)return false
+        if (sender !is Player) return false
 
-        if(command.name == "bal"){
-            if(args.isEmpty()){ //  残高確認
+        if (command.name == "bal") {
+            if (args.isEmpty()) { //  残高確認
                 val money = vaultManager.getEconomy()?.getBalance(sender)
                 sender.sendMessage("${ChatColor.GREEN}あなたの残高: $money")
                 return true
             }
 
-            when(args[0]){
+            when (args[0]) {
                 "get" -> {  //  お金をもらう
-                    vaultManager.getEconomy()?.depositPlayer(sender,100.toDouble())
+                    vaultManager.getEconomy()?.depositPlayer(sender, 100.toDouble())
                     sender.sendMessage("${ChatColor.YELLOW}100＄をゲットした！")
                 }
                 "remove" -> {   //  お金を引き出す
-                    vaultManager.getEconomy()?.withdrawPlayer(sender,100.toDouble())
+                    vaultManager.getEconomy()?.withdrawPlayer(sender, 100.toDouble())
                     sender.sendMessage("${ChatColor.YELLOW}100＄をゲットした！")
                 }
             }

@@ -18,27 +18,28 @@ import org.bukkit.plugin.java.JavaPlugin
  *
  */
 class VaultManager(plugin: JavaPlugin) {
-    private var plugin:JavaPlugin = plugin
-    private var mode:Boolean = true
+    private var plugin: JavaPlugin = plugin
+    private var mode: Boolean = true
 
-    private var economy:Economy? = null
+    private var economy: Economy? = null
 
     init {
-        mode = if(setupEconomy()){
+        mode = if (setupEconomy()) {
             plugin.logger.info("setup Vault")
             true
-        }else{
+        } else {
             false
         }
     }
 
-    private fun setupEconomy():Boolean{
-        if(plugin.server.pluginManager.getPlugin("Vault") == null){
+    private fun setupEconomy(): Boolean {
+        if (plugin.server.pluginManager.getPlugin("Vault") == null) {
             plugin.logger.info("Vault is not installed")
             return false
         }
-        val rsp:RegisteredServiceProvider<Economy>? = plugin.server.servicesManager.getRegistration(Economy::class.java)
-        if(rsp == null){
+        val rsp: RegisteredServiceProvider<Economy>? =
+            plugin.server.servicesManager.getRegistration(Economy::class.java)
+        if (rsp == null) {
             plugin.logger.info("Can not use Vault service")
             return false
         }
