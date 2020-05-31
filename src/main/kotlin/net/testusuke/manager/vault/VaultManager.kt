@@ -23,16 +23,15 @@ object VaultManager {
         private set
 
     fun setup() {
-        enableEconomy = if (setupEconomy()) {
-            plugin.logger.info("setup Vault")
-            true
-        } else {
-            false
-        }
+        enableEconomy = setupEconomy()
+        if (enableEconomy) plugin.logger.info("Enable Vault")
     }
 
+    private inline val enableVault
+        get() = plugin.server.pluginManager.isPluginEnabled("Vault")
+
     private fun setupEconomy(): Boolean {
-        if (!plugin.server.pluginManager.isPluginEnabled("Vault")) {
+        if (!enableVault) {
             plugin.logger.info("Vault is not installed")
             return false
         }

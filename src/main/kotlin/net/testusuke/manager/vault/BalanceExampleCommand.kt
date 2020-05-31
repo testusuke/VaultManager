@@ -13,15 +13,15 @@ object BalanceExampleCommand: CommandExecutor {
         if (sender !is Player) return false
         when (args.getOrNull(0)) {
             "get" -> {  //  お金をもらう
-                Main.vaultManager.economy?.depositPlayer(sender, 100.toDouble())
+                VaultManager.economy?.depositPlayer(sender, 100.toDouble())
                 sender.sendMessage("${ChatColor.YELLOW}100＄をゲットした！")
             }
             "remove" -> {   //  お金を引き出す
-                Main.vaultManager.economy?.withdrawPlayer(sender, 100.toDouble())
+                VaultManager.economy?.withdrawPlayer(sender, 100.toDouble())
                 sender.sendMessage("${ChatColor.YELLOW}100＄をゲットした！")
             }
             null -> { //  残高確認
-                val money = Main.vaultManager.economy?.getBalance(sender)
+                val money = VaultManager.economy?.getBalance(sender)
                 sender.sendMessage("${ChatColor.GREEN}あなたの残高: $money")
                 return true
             }
