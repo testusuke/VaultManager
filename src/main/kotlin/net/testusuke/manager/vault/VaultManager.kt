@@ -33,7 +33,7 @@ class VaultManager(private var plugin: JavaPlugin) {
     }
 
     private fun setupEconomy(): Boolean {
-        if (plugin.server.pluginManager.getPlugin("Vault") == null) {
+        if (!plugin.server.pluginManager.isPluginEnabled("Vault")) {
             plugin.logger.info("Vault is not installed")
             return false
         }
